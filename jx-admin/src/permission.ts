@@ -21,6 +21,12 @@ router.beforeEach((to, from, next) => {
         toast('请不要重复登录', 'warning')
         return next({ path: from.path ? from.path : '/' })
     }
+
+    // 页面标题
+
+    const titleMeta = to.meta.title
+    document.title = titleMeta ? 'jx' + ' - ' + titleMeta : document.title
+
     next()
 })
 

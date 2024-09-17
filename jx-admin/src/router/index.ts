@@ -6,12 +6,18 @@ const router = createRouter({
         {
             path: '/',
             name: 'index',
-            component: () => import('@/views/index.vue')
+            component: () => import('@/views/index.vue'),
+            meta: {
+                title: '管理台'
+            }
         },
         {
             path: '/login',
             name: 'login',
-            component: () => import('@/views/login.vue')
+            component: () => import('@/views/login.vue'),
+            meta: {
+                title: '登录'
+            }
         },
         {
             path: '/:pathMatch(.*)*',
