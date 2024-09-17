@@ -12,5 +12,13 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  // sass 全局变量引入
+  css:{
+    preprocessorOptions:{
+      scss:{
+        additionalData: '@import "@/style/global.scss";'
+      }
+    }
   }
 })
