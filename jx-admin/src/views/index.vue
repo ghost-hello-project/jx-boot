@@ -4,16 +4,27 @@
 </template>
 
 <script lang="ts">
-import { ElMessage } from 'element-plus'
+import { useAuthStore } from '@/stores/authStore';
+import { ElMessage } from 'element-plus';
+import { onMounted } from 'vue';
+import authApi from '@/api/auth'
 export default {
     setup() {
-        const sayHello = () => {
+        const authStore = useAuthStore()
+
+        const sayHello = async () => {
             ElMessage({
                 message: 'hello world',
                 type: 'success'
             })
             console.log('hello world')
+            const res = await authApi.userInfo()
+            console.log(res.data.body)
         }
+
+        onMounted(async () => {
+            await authStore.getUserInfo()
+        })
         return {
             sayHello
         }

@@ -39,10 +39,10 @@
 import type { LoginReq } from '@/interfaces/auth'
 import { reactive, ref, toRaw } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import authApi from '@/api/auth'
-import authUtil from '@/utils/authUtil'
+import { useAuthStore } from '@/stores/authStore'
 export default {
     setup() {
+        const authStore = useAuthStore()
         const loginDataInit = { username: 'superAdmin', password: '123456', loginType: '01' }
         const loginFormModel = reactive<LoginReq>(loginDataInit)
         const loginFormRef = ref<FormInstance>()
@@ -57,10 +57,7 @@ export default {
 
             await formEl.validate(async (valid, fields) => {
                 if (valid) {
-                    const loginRsp = await authApi.login(toRaw(loginFormModel))
-                    const loginBody = loginRsp.data
-                    console.log(loginBody)
-                    authUtil.setToken(loginBody.body.token)
+                    await authStore.login(toRaw(loginFormModel))
                 } else {
                     console.error('error submit:', fields)
                 }
