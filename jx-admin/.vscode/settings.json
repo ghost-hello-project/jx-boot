@@ -88,5 +88,8 @@
           "label": "format",
           "task": "format"
       }
-  ]
+],
+"[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+}
 }
