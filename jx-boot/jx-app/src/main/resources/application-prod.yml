@@ -1,0 +1,10 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+logging:
+  config: /usr/local/thresh-boot/conf/log4j2-prod.xml
+
+
+

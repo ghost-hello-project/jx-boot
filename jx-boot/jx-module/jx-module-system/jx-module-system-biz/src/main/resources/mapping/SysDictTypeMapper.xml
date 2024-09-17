@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laolang.jx.module.system.dict.mapper.SysDictTypeMapper">
+
+    <select id="selectDictTypeList" resultType="com.laolang.jx.module.system.dict.entity.SysDictType"
+            parameterType="com.laolang.jx.module.system.dict.dto.condition.SelectDictTypeListCondition">
+        select * from sys_dict_type
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="groupCode != null and groupCode != ''">
+                and group_code = #{groupCode}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="startDate != null and endDate != null">
+                and create_time between #{startDate} and #{endDate}
+            </if>
+            and deleted = 0
+        </where>
+    </select>
+</mapper>
