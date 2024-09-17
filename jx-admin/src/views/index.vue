@@ -1,6 +1,7 @@
 <template>
     <div class="red">hello world</div>
     <el-button type="primary" @click="sayHello">hello</el-button>
+    <el-button type="primary" @click="logout">退出</el-button>
 </template>
 
 <script lang="ts">
@@ -22,11 +23,16 @@ export default {
             console.log(res.data.body)
         }
 
+        const logout = async () => {
+            await authStore.logout()
+        }
+
         onMounted(async () => {
             await authStore.getUserInfo()
         })
         return {
-            sayHello
+            sayHello,
+            logout
         }
     }
 }
