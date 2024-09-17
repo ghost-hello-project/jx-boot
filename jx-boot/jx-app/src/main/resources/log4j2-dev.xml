@@ -3,7 +3,7 @@
     <properties>
         <property name="LOG_HOME">../logs/jx-boot</property>
         <property name="FILE_NAME">app</property>
-        <property name="jx.level">info</property>
+        <property name="jx.level">debug</property>
     </properties>
 
 

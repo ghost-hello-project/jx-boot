@@ -10,7 +10,6 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 public class BaseLogic {
 
     protected PlatformTypeEnum getPlatformType(HttpServletRequest request) {
-        ExceptionUtils
         String platformTypeCode = request.getHeader(GlobalConst.PLATFORM_TYPE_HEADER_KEY);
         return StrUtil.isBlank(platformTypeCode) ? null : PlatformTypeEnum.getByCode(platformTypeCode);
     }
