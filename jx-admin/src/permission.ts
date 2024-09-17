@@ -1,11 +1,13 @@
 import router from '@/router'
 import authUtil from '@/utils/authUtil'
-import { toast } from '@/utils/common'
+import { toast, progressStart, progressClose } from '@/utils/common'
 
 const login_path = '/login'
 
 router.beforeEach((to, from, next) => {
-    console.log('全局前置守卫')
+    // nprogress
+    progressStart()
+
     const token = authUtil.getToken()
 
     // 未登录, 跳转到登录页
@@ -20,4 +22,8 @@ router.beforeEach((to, from, next) => {
         return next({ path: from.path ? from.path : '/' })
     }
     next()
+})
+
+router.afterEach(() => {
+    progressClose()
 })

@@ -9,6 +9,7 @@ export type R<T> = {
     time: string
 }
 
+import NProgress from 'nprogress'
 import { ElNotification, ElMessageBox, ElMessage } from 'element-plus'
 
 export const toast = (
@@ -38,4 +39,12 @@ export const message = (msg: string, type: any = 'success') => {
         message: msg,
         type
     })
+}
+
+export const progressStart = () => {
+    NProgress.start()
+}
+
+export const progressClose = () => {
+    NProgress.done()
 }
