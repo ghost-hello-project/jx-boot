@@ -80,7 +80,7 @@ public class R<T> {
             return "";
         }
         String tid = StrUtil.replace(split.get(1), "<", "");
-        tid = StrUtil.replace(split.get(1), ">", "");
+        tid = StrUtil.replace(tid, ">", "");
         return tid;
     }
 
