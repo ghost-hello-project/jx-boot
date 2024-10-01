@@ -1,15 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import LayoutView from '@/layout/layout.vue'
+
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
             path: '/',
-            name: 'index',
-            component: () => import('@/views/index.vue'),
-            meta: {
-                title: '管理台'
-            }
+            component: LayoutView,
+            children: [
+                {
+                    path: '/',
+                    name: 'index',
+                    component: import('@/views/index.vue'),
+                    meta: {
+                        title: '管理台'
+                    }
+                }
+            ]
         },
         {
             path: '/login',
