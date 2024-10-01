@@ -11,45 +11,40 @@
         </div>
         <div class="menu-wrapper">
             <el-scrollbar>
-                <el-menu default-active="2" :collapse-transition="false" :collapse="appStore.getSideCollapse"
-                    :style="{ width: appStore.getSideWidth }">
-                    <el-menu-item index="2">
+                <el-menu :default-active="defaultActive" :collapse-transition="false"
+                    :collapse="appStore.getSideCollapse" :style="{ width: appStore.getSideWidth }" :router="true">
+                    <el-menu-item index="/">
                         <el-icon>
                             <HomeFilled />
                         </el-icon>
                         <span>首页</span>
                     </el-menu-item>
-                    <el-sub-menu index="1">
+                    <el-sub-menu index="/product">
                         <template #title>
                             <el-icon>
-                                <location />
+                                <setting />
                             </el-icon>
-                            <span>Navigator One</span>
+                            <span>商品管理</span>
                         </template>
-                        <el-menu-item-group title="Group One">
-                            <el-menu-item index="1-1">item one</el-menu-item>
-                            <el-menu-item index="1-2">item two</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="Group Two">
-                            <el-menu-item index="1-3">item three</el-menu-item>
-                        </el-menu-item-group>
-                        <el-sub-menu index="1-4">
-                            <template #title>item four</template>
-                            <el-menu-item index="1-4-1">item one</el-menu-item>
+                        <el-menu-item index="/product/product">商品管理</el-menu-item>
+                        <el-menu-item index="/product/category">商品分类</el-menu-item>
+                        <el-sub-menu index="2">
+                            <template #title>
+                                <span>品牌管理</span>
+                            </template>
+                            <el-menu-item index="/product/brand/category">品牌分类</el-menu-item>
+                            <el-menu-item index="/product/brand/list">品牌列表</el-menu-item>
                         </el-sub-menu>
                     </el-sub-menu>
-                    <el-menu-item index="3" disabled>
-                        <el-icon>
-                            <document />
-                        </el-icon>
-                        <span>Navigator Three</span>
-                    </el-menu-item>
-                    <el-menu-item index="4">
-                        <el-icon>
-                            <setting />
-                        </el-icon>
-                        <span>Navigator Four</span>
-                    </el-menu-item>
+                    <el-sub-menu index="/setting">
+                        <template #title>
+                            <el-icon>
+                                <setting />
+                            </el-icon>
+                            <span>设置</span>
+                        </template>
+                        <el-menu-item index="/setting/menu">菜单管理</el-menu-item>
+                    </el-sub-menu>
                 </el-menu>
             </el-scrollbar>
 
@@ -61,12 +56,25 @@
 <script lang="ts">
 import logoImg from '@/assets/image/logo.png'
 import { useAppStore } from '@/stores/appStore'
+import { useRoute } from 'vue-router'
+import { ref, onMounted } from 'vue'
+
+
 export default {
     setup() {
+        const route = useRoute()
         const appStore = useAppStore()
+
+        const defaultActive = ref<string>('')
+        console.log(route.path)
+
+        onMounted(() => {
+            defaultActive.value = route.path
+        })
         return {
             logoImg,
-            appStore
+            appStore,
+            defaultActive
         }
     }
 }
@@ -77,16 +85,18 @@ export default {
     transition: all 0.2s;
     box-sizing: border-box;
 
+
     .sysinfo-wrapper {
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 70px;
-        padding-top: 10px;
+        height: 50px;
         width: 200px;
         border-right: 1px solid #dcefe6;
         transition: all 0.2s;
+        border-bottom: 1px solid rgba(0, 21, 41, .08);
+        ;
 
         .title {
             display: flex;
@@ -106,7 +116,7 @@ export default {
         }
 
         .intro {
-            height: 28px;
+            height: 18px;
             display: flex;
             justify-content: center;
 
@@ -148,8 +158,8 @@ export default {
 
     .menu-wrapper {
         position: absolute;
-        top: 70px;
-        height: calc(100vh - 70px);
+        top: 50px;
+        height: calc(100vh - 50px);
         overflow-y: auto;
         transition: all 0.2s;
     }
