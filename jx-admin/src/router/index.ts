@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import LayoutView from '@/layout/layout.vue'
+import IndexView from '@/views/index.vue'
+import LoginView from '@/views/login.vue'
+import NotFoundView from '@/views/404.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,7 +15,7 @@ const router = createRouter({
                 {
                     path: '/',
                     name: 'index',
-                    component: import('@/views/index.vue'),
+                    component: IndexView,
                     meta: {
                         title: '管理台'
                     }
@@ -22,7 +25,7 @@ const router = createRouter({
         {
             path: '/login',
             name: 'login',
-            component: () => import('@/views/login.vue'),
+            component: LoginView,
             meta: {
                 title: '登录'
             }
@@ -30,7 +33,7 @@ const router = createRouter({
         {
             path: '/:pathMatch(.*)*',
             name: 'notfound',
-            component: () => import('@/views/404.vue')
+            component: NotFoundView
         }
     ]
 })

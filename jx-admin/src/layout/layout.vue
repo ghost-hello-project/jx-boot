@@ -1,9 +1,9 @@
 <template>
     <el-container>
-        <HeaderView />
-        <el-container>
-            <SideView />
-            <el-main>
+        <SideView />
+        <el-container class="content-wrapper">
+            <HeaderView />
+            <el-main class="main-container">
                 <TagListView />
                 <RouterView />
             </el-main>
@@ -28,3 +28,16 @@ export default {
     }
 }
 </script>
+
+
+<style scoped lang="scss">
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container {
+    width: calc(100vw - 200px);
+    padding: 0;
+}
+</style>
