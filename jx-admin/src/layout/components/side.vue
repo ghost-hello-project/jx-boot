@@ -1,6 +1,6 @@
 <template>
     <div class="sider-container">
-        <div class="sysinfo-wrapper">
+        <div :class="['sysinfo-wrapper', appStore.getSideCollapse ? 'collapse' : 'expand']">
             <div class="title">
                 <img :src="logoImg" />
                 <span>京西</span>
@@ -11,7 +11,8 @@
         </div>
         <div class="menu-wrapper">
             <el-scrollbar>
-                <el-menu default-active="2">
+                <el-menu default-active="2" :collapse-transition="false" :collapse="appStore.getSideCollapse"
+                    :style="{ width: appStore.getSideWidth }">
                     <el-menu-item index="2">
                         <el-icon>
                             <HomeFilled />
@@ -59,10 +60,13 @@
 
 <script lang="ts">
 import logoImg from '@/assets/image/logo.png'
+import { useAppStore } from '@/stores/appStore'
 export default {
     setup() {
+        const appStore = useAppStore()
         return {
             logoImg,
+            appStore
         }
     }
 }
@@ -70,14 +74,19 @@ export default {
 
 <style scoped lang="scss">
 .sider-container {
-    width: 200px;
+    transition: all 0.2s;
+    box-sizing: border-box;
 
     .sysinfo-wrapper {
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 60px;
+        height: 70px;
+        padding-top: 10px;
+        width: 200px;
         border-right: 1px solid #dcefe6;
+        transition: all 0.2s;
 
         .title {
             display: flex;
@@ -105,20 +114,57 @@ export default {
                 font-size: 12px;
             }
         }
+
+        &.collapse {
+
+            width: 64px;
+
+            .intro {
+                display: none;
+            }
+
+            .title {
+                span {
+                    display: none;
+                }
+            }
+        }
+
+        &.expand {
+            width: 200px;
+
+            .intro {
+                display: flex;
+                justify-content: center;
+            }
+
+            .title {
+                span {
+                    display: inline-block;
+                }
+            }
+        }
     }
 
     .menu-wrapper {
         position: absolute;
-        top: 60px;
-        height: calc(100vh - 60px);
+        top: 70px;
+        height: calc(100vh - 70px);
         overflow-y: auto;
-
-
+        transition: all 0.2s;
     }
 
     :deep(.el-menu) {
         height: 100%;
-        width: 200px;
+        transition: all 0.2s;
+    }
+
+    :deep(.el-scrollbar) {
+        transition: all 0.2s;
+    }
+
+    :deep(.el-scrollbar__view) {
+        height: 100%;
     }
 }
 </style>

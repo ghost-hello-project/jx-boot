@@ -1,8 +1,9 @@
 <template>
-    <div class="header-container">
-        <div class="nav">
+    <div :class="['header-container', appStore.getSideCollapse ? 'collapse' : 'expand']">
+        <div class="nav" @click="toggleSideCollapse">
             <el-icon>
-                <fold />
+                <fold v-if="appStore.getSideCollapse" />
+                <Expand v-else />
             </el-icon>
         </div>
         <div class="userinfo">
@@ -26,11 +27,13 @@
 
 <script lang="ts">
 import avatarImg from '@/assets/image/avatar.jpg'
-import { useAuthStore } from '@/stores/authStore';
+import { useAuthStore } from '@/stores/authStore'
+import { useAppStore } from '@/stores/appStore'
 import { messageBox, message } from '@/utils/common'
 export default {
     setup() {
         const authStore = useAuthStore()
+        const appStore = useAppStore()
 
         const navigateToUserCenter = () => {
             console.log('个人中心')
@@ -42,13 +45,18 @@ export default {
             }).catch(() => {
                 message('您取消了退出')
             })
+        }
 
+        const toggleSideCollapse = () => {
+            appStore.toggleSideCollapse()
         }
 
         return {
             avatarImg,
             navigateToUserCenter,
-            logout
+            logout,
+            toggleSideCollapse,
+            appStore
         }
     }
 }
@@ -56,13 +64,34 @@ export default {
 
 <style scoped lang="scss">
 .header-container {
-    width: calc(100vw - 200px);
     height: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
-    padding: 0 15px;
+    padding-right: 15px;
     box-sizing: border-box;
+    transition: all 0.2s;
+
+    &.collapse {
+        width: calc(100vw - 64px);
+    }
+
+    &.expand {
+        width: calc(100vw - 200px);
+    }
+
+    .nav {
+        height: 100%;
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, .025);
+        }
+    }
 }
 </style>
