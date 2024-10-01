@@ -38,6 +38,7 @@ export default {
 
 .main-container {
     width: calc(100vw - 200px);
-    padding: 0;
+    padding: 10px;
+    box-sizing: border-box;
 }
 </style>
