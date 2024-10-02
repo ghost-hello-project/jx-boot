@@ -71,6 +71,25 @@ const router = createRouter({
             ]
         },
         {
+            path: '/',
+            component: LayoutView,
+            children: [
+                {
+                    path: 'setting',
+                    children: [
+                        {
+                            path: 'menu',
+                            name: 'setting_menu',
+                            component: () => import('@/views/setting/menu.vue'),
+                            meta: {
+                                title: '菜单管理'
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             path: '/login',
             name: 'login',
             component: LoginView,
