@@ -6,7 +6,11 @@
             <el-main class="main-wrapper">
                 <TagListView />
                 <div class="main-container">
-                    <RouterView />
+                    <RouterView v-slot="{ Component }">
+                        <KeepAlive>
+                            <component :is="Component"></component>
+                        </KeepAlive>
+                    </RouterView>
                 </div>
             </el-main>
         </el-container>
