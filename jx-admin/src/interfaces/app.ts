@@ -4,3 +4,8 @@ export interface AppConfig {
         width: number
     }
 }
+
+export interface AppTab {
+    title: string
+    path: string
+}

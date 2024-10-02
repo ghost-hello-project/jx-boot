@@ -66,7 +66,6 @@ export default {
         const appStore = useAppStore()
 
         const defaultActive = ref<string>('')
-        console.log(route.path)
 
         onMounted(() => {
             defaultActive.value = route.path
@@ -83,11 +82,9 @@ export default {
 <style scoped lang="scss">
 .sider-container {
     transition: all 0.2s;
-    box-sizing: border-box;
 
 
     .sysinfo-wrapper {
-        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
